@@ -1,7 +1,4 @@
-def load_products(file: str) -> list[str]:
-    with open(file, "r") as f:
-        content = f.read()
-        return [word.strip() for word in content.split(',')]
+from day2_c1 import load_products
 
 def valid_debug(s: str) -> str:
     n = len(s)
@@ -27,7 +24,7 @@ def valid_debug(s: str) -> str:
                 return s
     return '0'
 
-def valid2(s: str) -> str:
+def valid(s: str) -> str:
     n = len(s)
     good = True
     for i in range(1, n//2 + 1):
@@ -43,14 +40,6 @@ def valid2(s: str) -> str:
                     break
             if good:
                 return s
-    return '0'
-
-def valid(s: str) -> str:
-    n = len(s)
-    if n%2 != 0:
-        return '0'
-    if s[:(n//2)] == s[(n//2):]:
-        return s
     return '0'
 
 def check_one_range(range_product: str, code: int) -> int:
@@ -69,7 +58,7 @@ def check_one_range(range_product: str, code: int) -> int:
     print("output code: ", code)
     return code - init_code
 
-def main() -> None:
+def main():
     products = load_products("product.txt")
     code = 0
     for prod in products:
@@ -77,18 +66,11 @@ def main() -> None:
     print(code)
 
 def main_test():
-    products = load_products("test.txt")
+    products = load_products("new_test.txt")
     code = 0
-    print(products)
     for prod in products:
         code = code + check_one_range(prod, code)
     print(code)
 
-def test():
-    a = "1188511880-1188511890"
-    print(valid_debug("1188511880"))
-    print(valid_debug("1188511885"))
-
 if __name__ == "__main__":
-    main_test()
-    # test()
+    main()
