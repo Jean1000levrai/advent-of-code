@@ -27,7 +27,7 @@ def valid_debug(s: str) -> str:
                 return s
     return '0'
 
-def valid(s: str) -> str:
+def valid2(s: str) -> str:
     n = len(s)
     good = True
     for i in range(1, n//2 + 1):
@@ -45,17 +45,23 @@ def valid(s: str) -> str:
                 return s
     return '0'
 
+def valid(s: str) -> str:
+    n = len(s)
+    if n%2 != 0:
+        return '0'
+    if s[:(n//2)] == s[(n//2):]:
+        return s
+    return '0'
+
 def check_one_range(range_product: str, code: int) -> int:
+    init_code = code
     dash = range_product.index('-')
     left = range_product[:dash]
     right = range_product[dash+1:]
-    print(range_product)
-    for i in range(int(left), int(right)):
-        print("  ", i)
+    for i in range(int(left), int(right)+1):
         if valid(str(i)) != '0':
-            print("---    ",valid(str(i)))
-        code = code + int(valid(str(i)))
-    return code
+            code = code + int(valid(str(i)))
+    return code - init_code
 
 def main() -> None:
     products = load_products("product.txt")
@@ -78,5 +84,4 @@ def test():
     print(valid_debug("1188511885"))
 
 if __name__ == "__main__":
-    main_test()
-    # test()
+    main()
