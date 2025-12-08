@@ -12,27 +12,41 @@ def get_largest(jolt: str) -> int:
             largest1 = jolt[i]
             i_l = i
     largest2 = jolt[i_l+1]
-    for i in range(i_l, n):
+    for i in range(i_l+1, n):
         if int(jolt[i]) > int(largest2):
             largest2 = jolt[i]
     
-    return int(largest1) + int(largest2)
-    
+    return int(largest1 + largest2)
+
+def get_largest_12(jolt: str) -> int:
+    n = len(jolt)
+    largests = [jolt[i] for i in range(12)]
+    for i in range(12, 0, -1):
+        print("iteration nb :", i)
+        for j in range(abs(i-12)+1, n - i):
+            print("  nb : ", jolt[j])
+            if int(jolt[j]) > int(largests[abs(i-12)]):
+                largests[abs(i-12)] = jolt[j]
+    s = ''
+    for nb in largests:
+        s = s + nb
+    return int(s)
 
 
 def main() -> None:
-    pass
+    jolts = load_jolts("jolts.txt")
+    code = 0
+    for jolt in jolts:
+        code = code + get_largest(jolt)
+    print(code)
 
 def main_test():
-    # a = load_jolts("jolts_test.txt")
-    # print(a)
-    # code = 0
-    # for jolt in a:
-    #     code = code + get_largest(jolt)
-    # print(code)
-    b = get_largest('987654321111111')
-    print(b)
+    jolts = load_jolts("jolts_test.txt")
+    code = 0
+    for jolt in jolts:
+        code = code + get_largest_12(jolt)
+    print(code)
 
 if __name__ == "__main__":
-    main_test()
     # main()
+    main_test()
