@@ -21,15 +21,20 @@ def get_largest(jolt: str) -> int:
 def get_largest_12(jolt: str) -> int:
     n = len(jolt)
     largests = [0 for _ in range(12)]
-    i = 1
+    i = 0
+    jolt_max = jolt[0]
     for j in range(12):
-        while jolt[i-1] < jolt[i] and n-i > j:
+        print("iteration: ", j)
+        while jolt_max < jolt[i] and n-i > j:
+            
+            print(".  jolt: ", jolt[i-1], i-1)
+            print(".  largests: ", largests[j], j)
             largests[j] = jolt[i]
             i = i + 1
 
     s = ''
     for nb in largests:
-        s = s + nb
+        s = s + str(nb)
     return int(s)
 
 
