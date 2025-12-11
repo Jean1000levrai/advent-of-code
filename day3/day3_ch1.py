@@ -20,13 +20,13 @@ def get_largest(jolt: str) -> int:
 
 def get_largest_12(jolt: str) -> int:
     n = len(jolt)
-    largests = [jolt[i] for i in range(12)]
-    for i in range(12, 0, -1):
-        print("iteration nb :", i)
-        for j in range(abs(i-12)+1, n - i):
-            print("  nb : ", jolt[j])
-            if int(jolt[j]) > int(largests[abs(i-12)]):
-                largests[abs(i-12)] = jolt[j]
+    largests = [0 for _ in range(12)]
+    i = 1
+    for j in range(12):
+        while jolt[i-1] < jolt[i] and n-i > j:
+            largests[j] = jolt[i]
+            i = i + 1
+
     s = ''
     for nb in largests:
         s = s + nb
@@ -47,6 +47,11 @@ def main_test():
         code = code + get_largest_12(jolt)
     print(code)
 
+def main_test2():
+    a = "234234234234278"
+    print(get_largest_12(a))
+
+
 if __name__ == "__main__":
     # main()
-    main_test()
+    main_test2()
