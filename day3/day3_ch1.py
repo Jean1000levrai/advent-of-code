@@ -20,43 +20,36 @@ def get_largest(jolt: str) -> int:
 
 def get_largest_12(jolt: str) -> int:
     n = len(jolt)
-    largests = [0 for _ in range(12)]
-    i = 0
-    jolt_max = jolt[0]
-    for j in range(12):
-        print("iteration: ", j)
-        while jolt_max < jolt[i] and n-i > j:
-            
-            print(".  jolt: ", jolt[i-1], i-1)
-            print(".  largests: ", largests[j], j)
-            largests[j] = jolt[i]
-            i = i + 1
+    result = []
+    start = 0
 
-    s = ''
-    for nb in largests:
-        s = s + str(nb)
-    return int(s)
+    for remaining in range(12, 0, -1):
+        # last index we can search
+        end = n - remaining + 1
+
+        max_digit = '0'
+        max_index = start
+
+        for i in range(start, end):
+            if jolt[i] > max_digit:
+                max_digit = jolt[i]
+                max_index = i
+
+        result.append(max_digit)
+        start = max_index + 1
+
+    return int(''.join(result))
+
 
 
 def main() -> None:
     jolts = load_jolts("jolts.txt")
     code = 0
     for jolt in jolts:
-        code = code + get_largest(jolt)
-    print(code)
-
-def main_test():
-    jolts = load_jolts("jolts_test.txt")
-    code = 0
-    for jolt in jolts:
         code = code + get_largest_12(jolt)
     print(code)
-
-def main_test2():
-    a = "234234234234278"
-    print(get_largest_12(a))
 
 
 if __name__ == "__main__":
     # main()
-    main_test2()
+    main()
