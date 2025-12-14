@@ -1,9 +1,4 @@
 
-def load_ids(file: str) -> list[str]:
-    with open(file, "r") as f:
-        content = f.read()
-        return [line.strip() for line in content.splitlines() if line.strip()]
-
 def load_ranges(file: str):
     i = 0
     char = ''
@@ -18,19 +13,35 @@ def load_ranges(file: str):
         return ([line.strip() for line in content[:i].splitlines() if line.strip()], 
         [line.strip() for line in content[i:].splitlines() if line.strip()])
 
-def valid(ranges: list[str]) -> str:
-    pass
+def valid(ranges: list[str]) -> tuple[tuple[int, int], ...]:
+    rep = []
+    for rang in ranges:
+        left, right = map(int, rang.split('-'))
+        rep.append((left, right))
+        
+    return tuple(rep)
 
-def is_valid(prod: int, ranges: str) -> int:
-    pass
 
-def main_test() -> None:
-    ranges, ids = load_ranges("id_test.txt")
-
-    print(ids, ranges)
 
 def main() -> None:
-    pass
+    ranges, ids = load_ranges("id.txt")
 
+    # print(ids, ranges)
+
+    a = valid(ranges)
+
+    print("valid ok")
+    code = 0
+
+    n = len(ids)
+   
+    for i in range(n):
+        print("iterated: ", i)
+        for rang in a:
+            if rang[0] <= int(ids[i]) <= rang[1]:
+                code += 1
+                break
+
+    print(code)
 if __name__ == "__main__":
-    main_test()
+    main()
