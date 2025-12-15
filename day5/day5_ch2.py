@@ -13,19 +13,27 @@ def load_ranges_only(file: str):
             i += 1
         return [line.strip() for line in content[:i].splitlines() if line.strip()]
 
+def valid(ranges: list[str]) -> tuple[tuple[int, int], ...]:
+    rep = []
+    for rang in ranges:
+        left, right = map(int, rang.split('-'))
+        rep.append((left, right))
+        
+    return tuple(rep)
+
 
 def main() -> None:
     ranges = load_ranges_only("id_test.txt")
 
-    a = valid(ranges)
+    a = []
 
     code = 0
 
-    for rang in a:
-        for nb in range(rang[0], rang[1]+1):
-            pass
+    for rang in ranges:
+        left, right = map(int, rang.split('-'))
+        for r in a:
+            if True:pass
 
-    print(code)
 
 if __name__ == "__main__":
     main()
